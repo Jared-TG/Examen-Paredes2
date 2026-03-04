@@ -78,6 +78,11 @@
                 <a href="#" class="muted-link">Olvidaste tu contrasena?</a>
             </div>
 
+
+            @if (!this.login_valido()) {
+                <span style="color: red">Correo o contraseña no válidos</span>
+            }
+
             <button class="submit-btn" type="submit" [disabled]="form.invalid">Iniciar sesion</button>
 
             <div class="divider"><span>O continua con</span></div>
