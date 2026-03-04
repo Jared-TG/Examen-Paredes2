@@ -18,6 +18,16 @@ export const routes: Routes = [
                 loadComponent: () => import('./pages/alumnos/alumnos').then(m => m.Alumnos)
             },
             {
+                path : 'maestros',
+                canActivate: [authGuard],
+                loadComponent: () => import('./pages/maestros/maestros').then(m => m.Maestros)
+            },
+            {
+                path : 'calificaciones',
+                canActivate: [authGuard],
+                loadComponent: () => import('./pages/calificaciones/calificaciones').then(m => m.Calificaciones)
+            },
+            {
                 path : '',
                 pathMatch: 'full',
                 redirectTo: 'login'
