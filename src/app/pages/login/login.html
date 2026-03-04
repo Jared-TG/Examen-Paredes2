@@ -24,20 +24,34 @@
                     <input id="email" type="email" placeholder="tu@email.com" autocomplete="email"
                         formControlName="email" />
                 </div>
+                @if (form.get('email')?.touched && form.get('email')?.invalid) {
+                    @if (form.get('email')?.hasError('required')) {
+                        <span style="color: red;">* El correo es requerido</span>
+                    }
+                    @if (form.get('email')?.hasError('email')) {
+                        <span style="color: red;">* Ingresa un correo valido</span>
+                    }
+                }
             </div>
 
             <div class="field-group">
                 <label for="password">Contrasena</label>
+
                 <div class="input-wrapper">
-                    <span class="input-icon" aria-hidden="true">
+                    <span class="input-icon" aria-hidden="true">    
                         <svg viewBox="0 0 24 24" fill="none">
                             <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.8" />
                             <path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.8"
                                 stroke-linecap="round" />
                         </svg>
+
                     </span>
+
                     <input id="password" type="password" placeholder="********" autocomplete="current-password"
                         formControlName="password" />
+
+
+
                     <button type="button" class="toggle-password" aria-label="Mostrar u ocultar contrasena">
                         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                             <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" stroke="currentColor"
@@ -46,6 +60,14 @@
                         </svg>
                     </button>
                 </div>
+                @if (form.get('password')?.touched && form.get('password')?.invalid) {
+                    @if (form.get('password')?.hasError('required')) {
+                        <span style="color: red;">* La contrasena es requerida</span>
+                    }
+                    @if (form.get('password')?.hasError('minlength')) {
+                        <span style="color: red;">* La contrasena debe tener al menos 6 caracteres</span>
+                    }
+                }
             </div>
 
             <div class="options-row">
@@ -56,7 +78,7 @@
                 <a href="#" class="muted-link">Olvidaste tu contrasena?</a>
             </div>
 
-            <button class="submit-btn" type="submit">Iniciar sesion</button>
+            <button class="submit-btn" type="submit" [disabled]="form.invalid">Iniciar sesion</button>
 
             <div class="divider"><span>O continua con</span></div>
 
