@@ -19,6 +19,7 @@ export class Login {
   private router = inject(Router);
 
   public login_valido = signal<boolean>(true);
+  public showPassword = signal<boolean>(false);
 
   form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -35,7 +36,6 @@ export class Login {
     const valido = this.auth.Login(email!, password!);
     this.login_valido.set(valido);
 
-    console.log(this.login_valido())
 
     if (valido) {
       this.router.navigate(['/home']);
