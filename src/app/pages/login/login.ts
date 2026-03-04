@@ -27,11 +27,9 @@ export class Login {
       this.form.markAllAsDirty();
       return; 
     }
-    console.log(this.form.value);
     const { email, password } = this.form.getRawValue(); 
 
-    const valido = this.auth.Login(email!, password!)
-    console.log(valido);
+    const valido = this.auth.Login(email!, password!);
 
     if (valido) {
       this.router.navigate(['/home']);
