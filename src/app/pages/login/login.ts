@@ -2,6 +2,8 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AutService } from '../../services/aut-service';
 import { Router } from '@angular/router';   
+import { observable } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -33,13 +35,15 @@ export class Login {
     }
     const { email, password } = this.form.getRawValue(); 
 
-    const valido = this.auth.Login(email!, password!);
-    this.login_valido.set(valido);
+    this.auth.Login(email!, password!)
+      .subscribe({
+        next: () => this.router.navigateByUrl('/home'),
+        error: (error: HttpErrorResponse) => {
+          console.log(error);
+          console.log(error.status);
+        }
+      });
 
-
-    if (valido) {
-      this.router.navigate(['/home']);
-      return;
-    }
   }
 }
+
